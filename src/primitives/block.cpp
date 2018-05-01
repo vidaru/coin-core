@@ -10,6 +10,7 @@
 #include "utilstrencodings.h"
 #include "crypto/common.h"
 #include "hashblock.h"
+#include "neoscrypt.h"
 
 uint256 CBlockHeader::GetHash() const
 {
@@ -21,7 +22,10 @@ uint256 CBlockHeader::GetHash() const
 
 uint256 CBlockHeader::GetPoWHash() const
 {
- return Hash9(BEGIN(nVersion), END(nNonce));
+  uint256 hash;
+  unsigned int profile = 0x0;
+  neoscrypt((unsigned char *) &nVersion, (unsigned char *) &hash, profile);
+  return hash;
 }
 
 std::string CBlock::ToString() const

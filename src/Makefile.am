@@ -279,6 +279,8 @@ libnavcoin_consensus_a_SOURCES = \
 	hamsi.c \
 	jh.c \
 	luffa.c \
+	neoscrypt.c \
+	neoscrypt.h \
 	shavite.c \
 	simd.c \
 	skein.c \
