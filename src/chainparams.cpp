@@ -27,7 +27,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
     // txNew.vout[0].scriptPubKey.clear();
     txNew.vout[0].nValue = genesisReward;
     txNew.vout[0].scriptPubKey.clear();
-    txNew.strDZeel = "MB8Coin genesis block";
+    txNew.strDZeel = "genesis block";
 
     CBlock genesis;
     genesis.nTime    = nTime;
@@ -55,7 +55,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "The Guardian 17/04/2018 Cryptocurrency: New York launches inquiry, saying people lack 'basic facts'";
+    const char* pszTimestamp = "The Guardian 17/04/2018 Cryptocurrency: people lack 'basic facts'";
     const CScript genesisOutputScript = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -150,12 +150,12 @@ public:
         nPruneAfterHeight = 100000;
         bnProofOfWorkLimit = arith_uint256(~arith_uint256() >> 16);
 
-        genesis = CreateGenesisBlock(1524005790, 1696862, 0x1e0ffff0, 1, 0);
+        genesis = CreateGenesisBlock(1524005790, 1468930, 0x1e0fffff, 1, 0);
 
 	      consensus.hashGenesisBlock = genesis.GetHash();
-
-        assert(consensus.hashGenesisBlock == uint256S("0x0000097e5aeae7468eb3c7305aef5c3bc4070536d1d504266c56e519fa2a0f42"));
-        assert(genesis.hashMerkleRoot == uint256S("0x89b32f1a49a0ecc9a8ee17a27d819f8140bb5c2ce1df15b44e37d9526842dca9"));
+        
+        assert(consensus.hashGenesisBlock == uint256S("0x00009bc3b7e1f6dbf6182729f059162cbb238e4556f641b4eccf48de4b8ef000"));
+        assert(genesis.hashMerkleRoot == uint256S("0x39f170310db491e43595f4ad4038d98cd662dc4f4af2b857bb5f900d95963110"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,85);
@@ -256,10 +256,10 @@ public:
         nPruneAfterHeight = 1000;
         bnProofOfWorkLimit = arith_uint256(~arith_uint256() >> 16);
 
-        genesis = CreateGenesisBlockTestnet(1512566756, 2042989216, 0x1d00ffff, 1, 0);
+        genesis = CreateGenesisBlockTestnet(1512566756, 2042997941, 0x1d00ffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        uint256 hashGenesisBlock = uint256S("0x00005befcbbc049b34348f568a81abcf3cddedbedd8f08a09bf62391cb70f2e2");
+        uint256 hashGenesisBlock = uint256S("0x0000536342813e50212465356c609607b986985ab56b127d21197f1250907787");
 
         if (true && (genesis.GetHash() != hashGenesisBlock || genesis.hashMerkleRoot != uint256S("0x472868bc7686c2f3e852eb12ab1757c9f2b2848f13ad7f7b848eef70c3f86fdd")))
         {
@@ -276,7 +276,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        assert(consensus.hashGenesisBlock == uint256S("0x00005befcbbc049b34348f568a81abcf3cddedbedd8f08a09bf62391cb70f2e2"));
+        assert(consensus.hashGenesisBlock == uint256S("0x0000536342813e50212465356c609607b986985ab56b127d21197f1250907787"));
         assert(genesis.hashMerkleRoot == uint256S("0x472868bc7686c2f3e852eb12ab1757c9f2b2848f13ad7f7b848eef70c3f86fdd"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,54);
