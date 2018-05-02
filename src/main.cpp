@@ -1804,19 +1804,13 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 
     if (nHeight == 1)
     {
-        CAmount nSubsidy = 59800000 * COIN;
+        CAmount nSubsidy = 571e6 * COIN;
         return nSubsidy;
     }
 
-    int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
-    // Force block reward to zero when right shift is undefined.
-    if (halvings >= 64)
-        return 0;
-
-    CAmount nSubsidy = 50 * COIN;
-    // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
-    nSubsidy >>= halvings;
-    return nSubsidy;
+    // Nothing else after premine but we still want to mine the blocks.
+    CAmount nSubsidy = 0 * COIN;
+    return nSubsidy
 }
 
 bool IsInitialBlockDownload()
@@ -2491,10 +2485,6 @@ VersionBitsCache versionbitscache;
 
 int32_t ComputeBlockVersion(const CBlockIndex* pindexPrev, const Consensus::Params& params)
 {
-
-    if (pindexPrev->nHeight < params.nLastPOWBlock) {
-        return 2;
-    }
 
     LOCK(cs_main);
     int32_t nVersion = IsSigHFEnabled(Params().GetConsensus(), pindexPrev) ? VERSIONBITS_TOP_BITS_SIG : VERSIONBITS_TOP_BITS;
@@ -8279,6 +8269,7 @@ bool CheckKernel(CBlockIndex* pindexPrev, unsigned int nBits, int64_t nTime, con
 // staker's coin stake reward based on coin age spent (coin-days)
 int64_t GetProofOfStakeReward(int nHeight, int64_t nCoinAge, int64_t nFees, CBlockIndex* pindexPrev)
 {
+  // Look here for proof of staking rewards.
     int64_t nRewardCoinYear;
     nRewardCoinYear = MAX_MINT_PROOF_OF_STAKE;
 
