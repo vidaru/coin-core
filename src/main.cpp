@@ -1810,7 +1810,7 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 
     // Nothing else after premine but we still want to mine the blocks.
     CAmount nSubsidy = 0 * COIN;
-    return nSubsidy
+    return nSubsidy;
 }
 
 bool IsInitialBlockDownload()
