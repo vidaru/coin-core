@@ -2491,6 +2491,11 @@ VersionBitsCache versionbitscache;
 
 int32_t ComputeBlockVersion(const CBlockIndex* pindexPrev, const Consensus::Params& params)
 {
+
+    if (pindexPrev->nHeight < params.nLastPOWBlock) {
+        return 2;
+    }
+
     LOCK(cs_main);
     int32_t nVersion = IsSigHFEnabled(Params().GetConsensus(), pindexPrev) ? VERSIONBITS_TOP_BITS_SIG : VERSIONBITS_TOP_BITS;
 
@@ -2501,8 +2506,9 @@ int32_t ComputeBlockVersion(const CBlockIndex* pindexPrev, const Consensus::Para
         }
     }
 
-    if(IsWitnessEnabled(pindexPrev,Params().GetConsensus()))
+    if(IsWitnessEnabled(pindexPrev,Params().GetConsensus())) {
         nVersion |= nSegWitVersionMask;
+    }
 
     return nVersion;
 }

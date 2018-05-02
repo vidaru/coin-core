@@ -744,18 +744,27 @@ void NavCoinStaker(const CChainParams& chainparams)
                 MilliSleep(1000);
             }
 
+            // Add in looping code here to check the block height against POS.
+            while (chainparams.GetConsensus().nFirstPOSBlock > chainActive.Tip()->nHeight) {
+              MilliSleep(30000);
+            }
+
             //
             // Create new block
             //<
             uint64_t nFees = 0;
 
             std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript, true, &nFees));
+
             if (!pblocktemplate.get())
             {
                 LogPrintf("Error in NavCoinStaker: Keypool ran out, please call keypoolrefill before restarting the staking thread\n");
                 return;
             }
+
+
             CBlock *pblock = &pblocktemplate->block;
+
 
             //LogPrint("coinstake","Running NavCoinStaker with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
             //     ::GetSerializeSize(*pblock, SER_NETWORK, PROTOCOL_VERSION));
