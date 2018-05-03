@@ -151,11 +151,11 @@ public:
         nPruneAfterHeight = 100000;
         bnProofOfWorkLimit = arith_uint256(~arith_uint256() >> 16);
 
-        genesis = CreateGenesisBlock(1524005790, 1468930, 0x1e0fffff, 1, 0);
+        genesis = CreateGenesisBlock(1524005790, 1547425, 0x1f00ffff, 1, 0);
 
 	      consensus.hashGenesisBlock = genesis.GetHash();
-        
-        assert(consensus.hashGenesisBlock == uint256S("0x00009bc3b7e1f6dbf6182729f059162cbb238e4556f641b4eccf48de4b8ef000"));
+
+        assert(consensus.hashGenesisBlock == uint256S("0x0000cae2d1ec53286a30b8638ed1eec9138fb95c34e0c7d4304942080689c4ab"));
         assert(genesis.hashMerkleRoot == uint256S("0x39f170310db491e43595f4ad4038d98cd662dc4f4af2b857bb5f900d95963110"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
@@ -177,7 +177,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            ( 0, uint256S("0x0000097e5aeae7468eb3c7305aef5c3bc4070536d1d504266c56e519fa2a0f42")),
+            ( 0, uint256S("0x0000cae2d1ec53286a30b8638ed1eec9138fb95c34e0c7d4304942080689c4ab")),
             1524005790, // * UNIX timestamp of last checkpoint block
             0,    // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
@@ -257,10 +257,10 @@ public:
         nPruneAfterHeight = 1000;
         bnProofOfWorkLimit = arith_uint256(~arith_uint256() >> 16);
 
-        genesis = CreateGenesisBlockTestnet(1512566756, 2042997941, 0x1d00ffff, 1, 0);
+        genesis = CreateGenesisBlockTestnet(1512566756, 2043100942, 0x1d00ffff, 1, 0);
         consensus.hashGenesisBlock = genesis.GetHash();
 
-        uint256 hashGenesisBlock = uint256S("0x0000536342813e50212465356c609607b986985ab56b127d21197f1250907787");
+        uint256 hashGenesisBlock = uint256S("0x00005dcdb322d5e555de998408891a0d9ba72e27ca25408be4bea1b91c5e898e");
 
         if (true && (genesis.GetHash() != hashGenesisBlock || genesis.hashMerkleRoot != uint256S("0x472868bc7686c2f3e852eb12ab1757c9f2b2848f13ad7f7b848eef70c3f86fdd")))
         {
@@ -277,7 +277,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
 
-        assert(consensus.hashGenesisBlock == uint256S("0x0000536342813e50212465356c609607b986985ab56b127d21197f1250907787"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00005dcdb322d5e555de998408891a0d9ba72e27ca25408be4bea1b91c5e898e"));
         assert(genesis.hashMerkleRoot == uint256S("0x472868bc7686c2f3e852eb12ab1757c9f2b2848f13ad7f7b848eef70c3f86fdd"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,54);
